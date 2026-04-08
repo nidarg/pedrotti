@@ -1,18 +1,14 @@
-import { Phone, MessageCircle, MapPinned } from "lucide-react";
+import { Phone, MessageCircle } from "lucide-react";
 import { siteData } from "../lib/site-data";
+import LocationWhatsAppButton from "./LocationWhatsAppButton";
 
 export default function StickyMobileBar() {
   const whatsappMessage = encodeURIComponent(
     "Ciao, ho bisogno di soccorso stradale."
   );
 
-  const locationMessage = encodeURIComponent(
-    "Ciao, vi invio subito la mia posizione GPS."
-  );
-
   const phoneLink = `tel:${siteData.company.phoneHref}`;
   const whatsappLink = `https://wa.me/${siteData.company.whatsappNumber}?text=${whatsappMessage}`;
-  const locationLink = `https://wa.me/${siteData.company.whatsappNumber}?text=${locationMessage}`;
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 border-t border-zinc-200 bg-white shadow-lg md:hidden">
@@ -35,15 +31,11 @@ export default function StickyMobileBar() {
           WhatsApp
         </a>
 
-        <a
-          href={locationLink}
-          target="_blank"
-          rel="noreferrer"
-          className="flex flex-col items-center justify-center gap-1 py-3 text-xs font-semibold text-zinc-900"
-        >
-          <MapPinned size={18} />
-          Position
-        </a>
+        <LocationWhatsAppButton
+          iconSize={18}
+          label="Position"
+          className="flex flex-col items-center justify-center gap-1 py-3 text-xs font-semibold text-zinc-900 disabled:cursor-not-allowed disabled:opacity-60"
+        />
       </div>
     </div>
   );

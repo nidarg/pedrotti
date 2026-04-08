@@ -1,7 +1,8 @@
 import Hero from "@/components/hero/Hero";
 import Services from "@/components/Services";
-import Locations from "@/components/Locations";
 import FleetGallery from "@/components/FleetGallery";
+import Locations from "@/components/Locations";
+import LegalFooter from "@/components/LegalFooter";
 import StickyMobileBar from "@/components/StickyMobileBar";
 
 export default function HomePage() {
@@ -11,6 +12,7 @@ export default function HomePage() {
       <Services />
       <FleetGallery />
       <Locations />
+      <LegalFooter />
       <StickyMobileBar />
     </main>
   );
