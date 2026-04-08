@@ -10,7 +10,7 @@ export default function HeroLogo() {
         width={1400}
         height={320}
         priority
-        className="h-auto w-56 sm:w-72 md:w-96 lg:w-[520px]"
+        className=" mx-auto h-auto w-56 sm:w-72 md:w-96 lg:w-[520px]"
       />
     </div>
   );

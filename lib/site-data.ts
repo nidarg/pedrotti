@@ -16,18 +16,22 @@ export const siteData = {
       "Pedrotti Group è specializzato in soccorso stradale, recupero e trasporto veicoli, con particolare riferimento ai mezzi pesanti. Assistenza attiva 24 ore su 24 in viabilità ordinaria e autostradale.",
   },
 
-  locations: [
-    {
-      name: "Sede di Mori",
-      addressLine1: "Via Matteotti 3/C",
-      addressLine2: "38065 Mori (TN)",
-    },
-    {
-      name: "Sede di Trento",
-      addressLine1: "Loc. Roncafort 4",
-      addressLine2: "38121 Trento (TN)",
-    },
-  ],
+ locations: [
+  {
+    name: "Sede di Mori",
+    addressLine1: "Via Matteotti 3/C",
+    addressLine2: "38065 Mori (TN)",
+    mapsUrl:
+      "https://www.google.com/maps/search/?api=1&query=Via+Matteotti+3/C+38065+Mori+TN",
+  },
+  {
+    name: "Sede di Trento",
+    addressLine1: "Loc. Roncafort 4",
+    addressLine2: "38121 Trento (TN)",
+    mapsUrl:
+      "https://www.google.com/maps/search/?api=1&query=Loc.+Roncafort+4+38121+Trento+TN",
+  },
+],
 
   certifications: [
     "Certificazione del sistema qualità Europ Assistance",
@@ -83,6 +87,35 @@ export const siteData = {
     description:
       "Ripristino danni, interventi di carrozzeria e riparazioni post incidente.",
     iconKey: "tools",
+  },
+],
+
+
+trustBadges: [
+  {
+    title: "Assistenza H24",
+    description: "Servizio attivo 24 ore su 24 per emergenze stradali.",
+    iconKey: "clock",
+  },
+  {
+    title: "Mezzi pesanti",
+    description: "Recupero e assistenza specializzata per veicoli industriali.",
+    iconKey: "truck",
+  },
+  {
+    title: "Qualità certificata",
+    description: "Sistema qualità certificato in accordo alla UNI-EN ISO 9001:2008.",
+    iconKey: "badgeCheck",
+  },
+  {
+    title: "Strade e autostrade",
+    description: "Interventi in viabilità ordinaria e autostradale in completa sicurezza.",
+    iconKey: "road",
+  },
+  {
+    title: "Partner Hertz",
+    description: "Noleggio auto e furgoni disponibile presso le sedi di Mori e Trento.",
+    iconKey: "car",
   },
 ],
 } as const;

@@ -1,8 +1,8 @@
-import SectionContainer from "./layout/SectionContainer";
+import SectionContainer from "../layout/SectionContainer";
 import HeroLogo from "./HeroLogo";
 import HeroContent from "./HeroContent";
 import HeroActions from "./HeroActions";
-import HeroLocations from "./HeroLocations";
+// import HeroLocations from "./HeroLocations";
 
 export default function Hero() {
   return (
@@ -10,7 +10,7 @@ export default function Hero() {
         <HeroLogo />
         <HeroContent />
         <HeroActions />
-        <HeroLocations />
+        {/* <HeroLocations /> */}
       </div>
     </SectionContainer>
   );

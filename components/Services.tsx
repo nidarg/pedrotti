@@ -1,7 +1,7 @@
 import { Wrench } from "lucide-react";
 import { siteData } from "../lib/site-data";
 import { serviceIcons } from "../lib/service-icons";
-import SectionContainer from "./hero/layout/SectionContainer";
+import SectionContainer from "./layout/SectionContainer";
 
 export default function Services() {
   return (
