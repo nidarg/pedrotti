@@ -30,19 +30,59 @@ export const siteData = {
   ],
 
   certifications: [
-    'Certificazione del sistema qualità Europ Assistance',
-    'UNI-EN ISO 9001:2008',
-    'Servizio di Soccorso Meccanico H24 in viabilità ordinaria e autostradale',
+    "Certificazione del sistema qualità Europ Assistance",
+    "UNI-EN ISO 9001:2008",
+    "Servizio di Soccorso Meccanico H24 in viabilità ordinaria e autostradale",
   ],
 
-  services: [
-    "Soccorso stradale H24",
-    "Recupero e trasporto veicoli",
-    "Assistenza per mezzi pesanti",
-    "Autofficina",
-    "Noleggio auto e furgoni Hertz",
-    "Noleggio autogrù",
-    "Revisione periodica auto e moto",
-    "Carrozzeria",
-  ],
-};
+ services: [
+  {
+    title: "Soccorso stradale H24",
+    description:
+      "Intervento rapido 24 ore su 24 per auto, moto, furgoni e assistenza in emergenza.",
+    iconKey: "truck",
+  },
+  {
+    title: "Recupero e trasporto veicoli",
+    description:
+      "Recupero sicuro e trasporto professionale di veicoli incidentati o in panne.",
+    iconKey: "towTruck",
+  },
+  {
+    title: "Assistenza per mezzi pesanti",
+    description:
+      "Supporto specializzato per camion, mezzi industriali e flotte aziendali.",
+    iconKey: "shield",
+  },
+  {
+    title: "Autofficina",
+    description:
+      "Diagnosi, riparazioni e assistenza tecnica con personale qualificato.",
+    iconKey: "wrench",
+  },
+  {
+    title: "Noleggio auto e furgoni Hertz",
+    description:
+      "Servizio di noleggio rapido per mobilità sostitutiva e necessità aziendali.",
+    iconKey: "car",
+  },
+  {
+    title: "Noleggio autogrù",
+    description:
+      "Servizio di sollevamento e recupero mezzi con attrezzature specialistiche.",
+    iconKey: "construction",
+  },
+  {
+    title: "Revisione periodica auto e moto",
+    description:
+      "Linea revisione certificata per auto, moto e controlli periodici.",
+    iconKey: "clipboard",
+  },
+  {
+    title: "Carrozzeria",
+    description:
+      "Ripristino danni, interventi di carrozzeria e riparazioni post incidente.",
+    iconKey: "tools",
+  },
+],
+} as const;

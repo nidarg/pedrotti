@@ -7,7 +7,7 @@ export default function HeroContent() {
         {siteData.hero.badge}
       </p>
 
-      <h1 className="text-4xl font-bold leading-tight sm:text-5xl md:text-6xl">
+      <h1 className="text-2xl font-bold leading-tight sm:text-4xl md:text-5xl">
         {siteData.hero.title}
       </h1>
 
