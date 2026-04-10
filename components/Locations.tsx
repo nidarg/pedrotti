@@ -1,6 +1,7 @@
 import { Mail, Phone, MapPin, Globe } from "lucide-react";
 import SectionContainer from "./layout/SectionContainer";
 import { siteData } from "../lib/site-data";
+import { trackEvent } from "../lib/gtag";
 
 export default function Locations() {
   return (
@@ -50,6 +51,11 @@ export default function Locations() {
                 target="_blank"
                 rel="noreferrer"
                 className="mt-5 inline-flex items-center gap-2 rounded-xl bg-zinc-900 px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90"
+                 onClick={() =>
+    trackEvent("maps_click", {
+      office: location.name,
+    })
+  }
               >
                 <MapPin size={16} />
                 Apri su Maps

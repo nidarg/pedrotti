@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { MapPinned } from "lucide-react";
 import { siteData } from "../lib/site-data";
+import { trackEvent } from "../lib/gtag";
 
 type LocationWhatsAppButtonProps = {
   className?: string;
@@ -18,6 +19,9 @@ export default function LocationWhatsAppButton({
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSendLocation = () => {
+    trackEvent("location_click", {
+  placement: label,
+});
     if (!navigator.geolocation) {
       const fallbackMessage = encodeURIComponent(
         "Ciao, ho bisogno di soccorso stradale. Non riesco a condividere automaticamente la mia posizione. Vi invio la posizione manualmente su WhatsApp."
