@@ -1,3 +1,5 @@
+
+"use client"
 import { Phone, MessageCircle } from "lucide-react";
 import { siteData } from "../lib/site-data";
 import LocationWhatsAppButton from "./LocationWhatsAppButton";

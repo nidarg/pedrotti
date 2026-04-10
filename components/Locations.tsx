@@ -1,3 +1,5 @@
+"use client"
+
 import { Mail, Phone, MapPin, Globe } from "lucide-react";
 import SectionContainer from "./layout/SectionContainer";
 import { siteData } from "../lib/site-data";
