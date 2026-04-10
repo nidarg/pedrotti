@@ -15,11 +15,18 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pedrotti Srl",
-  description: "Pedrotti Group è specializzato in soccorso stradale, recupero e trasporto veicoli, con particolare riferimento ai mezzi pesanti. Assistenza attiva 24 ore su 24 in viabilità ordinaria e autostradale",
-  //  icons: {
-  //   icon: "/images/logo-pedrotti.png",
-  // },
+  title:
+    "Soccorso Stradale Pedrotti H24 | Trento, Mori, Mezzi Pesanti e Autogrù",
+  description:
+    "Pedrotti offre soccorso stradale H24 a Trento e Mori, recupero auto, furgoni, camion, mezzi pesanti e autogrù. Intervento rapido in viabilità ordinaria e autostradale.",
+  keywords: [
+    "soccorso stradale trento",
+    "soccorso stradale mori",
+    "carro attrezzi trento",
+    "mezzi pesanti trento",
+    "autogrù trento",
+    "soccorso camion A22",
+  ],
 };
 
 export default function RootLayout({
