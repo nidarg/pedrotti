@@ -27,6 +27,15 @@ export const metadata: Metadata = {
     "autogrù trento",
     "soccorso camion A22",
   ],
+  openGraph: {
+    title:
+      "Soccorso Stradale Pedrotti H24 | Trento, Mori",
+    description:
+      "Intervento rapido H24 per auto, camion, autogrù e mezzi pesanti.",
+    type: "website",
+    locale: "it_IT",
+    siteName: "Pedrotti Srl",
+  },
 };
 
 export default function RootLayout({
