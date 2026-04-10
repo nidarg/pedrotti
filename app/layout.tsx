@@ -17,9 +17,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Pedrotti Srl",
   description: "Pedrotti Group è specializzato in soccorso stradale, recupero e trasporto veicoli, con particolare riferimento ai mezzi pesanti. Assistenza attiva 24 ore su 24 in viabilità ordinaria e autostradale",
-   icons: {
-    icon: "/images/logo-pedrotti.png",
-  },
+  //  icons: {
+  //   icon: "/images/logo-pedrotti.png",
+  // },
 };
 
 export default function RootLayout({
