@@ -11,7 +11,7 @@ export const siteData = {
 
   hero: {
     badge: "Soccorso stradale H24",
-    title: "Intervento rapido per auto, furgoni e mezzi pesanti",
+    title: "Intervento rapido H24\nper auto, furgoni e mezzi pesanti",
     subtitle:
       "Pedrotti Group è specializzato in soccorso stradale, recupero e trasporto veicoli, con particolare riferimento ai mezzi pesanti. Assistenza attiva 24 ore su 24 in viabilità ordinaria e autostradale.",
   },
