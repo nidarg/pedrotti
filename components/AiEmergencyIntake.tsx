@@ -39,12 +39,6 @@ export default function AiEmergencyIntake({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const openWhatsapp = (finalMessage: string) => {
-    const whatsappMessage = encodeURIComponent(finalMessage);
-    const whatsappLink = `https://wa.me/${siteData.company.whatsappNumber}?text=${whatsappMessage}`;
-    window.open(whatsappLink, "_blank", "noreferrer");
-  };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -55,6 +49,9 @@ export default function AiEmergencyIntake({
 
     setLoading(true);
     setError("");
+
+    // Deschidem tabul imediat, ca să nu fie blocat de browser
+    const pendingWindow = window.open("", "_blank");
 
     try {
       const res = await fetch("/api/emergency-intake", {
@@ -77,8 +74,19 @@ export default function AiEmergencyIntake({
 
       const data: IntakeResponse = await res.json();
 
+      const sendToWhatsapp = (finalMessage: string) => {
+        const whatsappMessage = encodeURIComponent(finalMessage);
+        const whatsappLink = `https://wa.me/${siteData.company.whatsappNumber}?text=${whatsappMessage}`;
+
+        if (pendingWindow) {
+          pendingWindow.location.href = whatsappLink;
+        } else {
+          window.open(whatsappLink, "_blank", "noreferrer");
+        }
+      };
+
       if (!navigator.geolocation) {
-        openWhatsapp(data.summary);
+        sendToWhatsapp(data.summary);
         return;
       }
 
@@ -86,22 +94,36 @@ export default function AiEmergencyIntake({
         (position) => {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
+          const accuracy = position.coords.accuracy;
 
           const mapsLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
-          const finalMessage = `${data.summary}\n\nPosizione GPS: ${mapsLink}`;
 
-          openWhatsapp(finalMessage);
+          const locationText =
+            accuracy <= 80
+              ? `Posizione GPS: ${mapsLink}`
+              : `Posizione GPS approssimativa: ${mapsLink}\nAccuratezza stimata: ${Math.round(
+                  accuracy
+                )} metri.
+                Se possibile, condividere anche la posizione manuale su WhatsApp.`;
+
+          const finalMessage = `${data.summary}\n\n${locationText}`;
+
+          sendToWhatsapp(finalMessage);
         },
         () => {
-          openWhatsapp(data.summary);
+          sendToWhatsapp(data.summary);
         },
         {
           enableHighAccuracy: true,
-          timeout: 10000,
+          timeout: 15000,
           maximumAge: 0,
         }
       );
     } catch {
+      if (pendingWindow) {
+        pendingWindow.close();
+      }
+
       setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);

@@ -1,6 +1,6 @@
 # Explicație pe cod, componentă cu componentă
 
-Mai jos îți explic fiecare fișier pe baza codului pe care l-ai trimis, fără să intru în partea de Tailwind.
+
 
 ---
 

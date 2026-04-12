@@ -6,7 +6,7 @@ export const siteData = {
     phoneDisplay: "(+39) 0464 913290",
     phoneHref: "+390464913290",
     website: "www.soccorsostradalepedrotti.com",
-    whatsappNumber: "390464913290",
+    whatsappNumber: "40755741335",
   },
 
   hero: {
