@@ -40,95 +40,107 @@ export default function AiEmergencyIntake({
   const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!message.trim()) {
-      setError("Please describe the problem.");
-      return;
+  if (!message.trim()) {
+    setError("Please describe the problem.");
+    return;
+  }
+
+  setLoading(true);
+  setError("");
+
+  const isMobile =
+    typeof navigator !== "undefined" &&
+    /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  try {
+    const res = await fetch("/api/emergency-intake", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message,
+        vehicleType,
+        canMove,
+        needsTowing,
+        needsHeavyRecovery,
+      }),
+    });
+
+    if (!res.ok) {
+      throw new Error("Request failed");
     }
 
-    setLoading(true);
-    setError("");
+    const data: IntakeResponse = await res.json();
 
-    // Deschidem tabul imediat, ca să nu fie blocat de browser
-    const pendingWindow = window.open("", "_blank");
+    const openWhatsapp = (finalMessage: string) => {
+      const encodedMessage = encodeURIComponent(finalMessage);
+      const waWebLink = `https://wa.me/${siteData.company.whatsappNumber}?text=${encodedMessage}`;
+      const waAppLink = `whatsapp://send?phone=${siteData.company.whatsappNumber}&text=${encodedMessage}`;
 
-    try {
-      const res = await fetch("/api/emergency-intake", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          message,
-          vehicleType,
-          canMove,
-          needsTowing,
-          needsHeavyRecovery,
-        }),
-      });
+      if (isMobile) {
+        // pe mobil încercăm întâi aplicația
+        window.location.href = waAppLink;
 
-      if (!res.ok) {
-        throw new Error("Request failed");
-      }
+        // fallback dacă app link nu e prins
+        setTimeout(() => {
+          window.location.href = waWebLink;
+        }, 1200);
 
-      const data: IntakeResponse = await res.json();
-
-      const sendToWhatsapp = (finalMessage: string) => {
-        const whatsappMessage = encodeURIComponent(finalMessage);
-        const whatsappLink = `https://wa.me/${siteData.company.whatsappNumber}?text=${whatsappMessage}`;
-
-        if (pendingWindow) {
-          pendingWindow.location.href = whatsappLink;
-        } else {
-          window.open(whatsappLink, "_blank", "noreferrer");
-        }
-      };
-
-      if (!navigator.geolocation) {
-        sendToWhatsapp(data.summary);
         return;
       }
 
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const latitude = position.coords.latitude;
-          const longitude = position.coords.longitude;
-          const accuracy = position.coords.accuracy;
+      // desktop
+      window.open(waWebLink, "_blank", "noreferrer");
+    };
 
-          const mapsLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
-
-          const locationText =
-            accuracy <= 80
-              ? `Posizione GPS: ${mapsLink}`
-              : `Posizione GPS approssimativa: ${mapsLink}\nAccuratezza stimata: ${Math.round(
-                  accuracy
-                )} metri.
-                Se possibile, condividere anche la posizione manuale su WhatsApp.`;
-
-          const finalMessage = `${data.summary}\n\n${locationText}`;
-
-          sendToWhatsapp(finalMessage);
-        },
-        () => {
-          sendToWhatsapp(data.summary);
-        },
-        {
-          enableHighAccuracy: true,
-          timeout: 15000,
-          maximumAge: 0,
-        }
-      );
-    } catch {
-      if (pendingWindow) {
-        pendingWindow.close();
-      }
-
-      setError("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
+    if (!navigator.geolocation) {
+      openWhatsapp(data.summary);
+      return;
     }
-  };
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        const accuracy = position.coords.accuracy;
+
+        const mapsLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
+
+        const locationText =
+          accuracy <= 80
+            ? `Posizione GPS: ${mapsLink}`
+            : `Posizione GPS approssimativa: ${mapsLink}
+Accuratezza stimata: ${Math.round(accuracy)} metri.
+Se possibile, condividere anche la posizione manuale su WhatsApp.`;
+
+        const finalMessage = `${data.summary}
+
+${locationText}`;
+
+        openWhatsapp(finalMessage);
+      },
+      () => {
+        openWhatsapp(
+          `${data.summary}
+
+Non è stato possibile rilevare una posizione GPS precisa. Se possibile, condividere la posizione manuale su WhatsApp.`
+        );
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 15000,
+        maximumAge: 0,
+      }
+    );
+  } catch {
+    setError("Something went wrong. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="rounded-3xl border border-zinc-200 bg-white p-5 shadow-xl md:p-8">
