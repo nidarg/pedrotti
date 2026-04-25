@@ -49,14 +49,17 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
-      <Script
-  src="https://multilingual-dispatch-flow.vercel.app/dispatch-widget.js"
-  data-company="pedrotti"
-  data-button-text="Need roadside help?"
-  data-accent-color="#dc2626"
-  strategy="afterInteractive"
-/>
+     <body>
+  {children}
+
+  <Script
+    src="https://multilingual-dispatch-flow.vercel.app/dispatch-widget.js"
+    data-company="pedrotti"
+    data-button-text="Need roadside help?"
+    data-accent-color="#dc2626"
+    strategy="afterInteractive"
+  />
+</body>
       <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />
     </html>
   );
