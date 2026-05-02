@@ -4,7 +4,7 @@ export const siteData = {
     shortName: "Soccorso Stradale Pedrotti",
     email: "info@soccorsostradalepedrotti.com",
     phoneDisplay: "(+39) 0464 913290",
-    phoneHref: "+390464913290",
+    phoneHref: "+40755741335",
     
     // phoneHref: "+390464913290",
     website: "www.soccorsostradalepedrotti.com",
